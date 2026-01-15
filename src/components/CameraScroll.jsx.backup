@@ -1,0 +1,331 @@
+"use client";
+
+import { useScroll, useTransform, useMotionValueEvent, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+
+const FRAME_COUNT = 240;
+
+export default function CameraScroll() {
+    const canvasRef = useRef(null);
+    const [images, setImages] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const containerRef = useRef(null);
+
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end end"]
+    });
+
+    const currentIndex = useTransform(scrollYProgress, [0, 1], [0, FRAME_COUNT - 1]);
+
+    // 10 Storytelling Moments - Each with opacity, Y position, and scale
+    // Moment 1: 0-12%
+    const story1Opacity = useTransform(scrollYProgress, [0, 0.06, 0.12, 0.15], [0, 1, 1, 0]);
+    const story1Y = useTransform(scrollYProgress, [0, 0.06, 0.12, 0.15], [30, 0, 0, -30]);
+    const story1Scale = useTransform(scrollYProgress, [0, 0.06], [0.95, 1]);
+
+    // Moment 2: 12-22%
+    const story2Opacity = useTransform(scrollYProgress, [0.12, 0.17, 0.22, 0.25], [0, 1, 1, 0]);
+    const story2Y = useTransform(scrollYProgress, [0.12, 0.17, 0.22, 0.25], [30, 0, 0, -30]);
+    const story2Scale = useTransform(scrollYProgress, [0.12, 0.17], [0.95, 1]);
+
+    // Moment 3: 22-32%
+    const story3Opacity = useTransform(scrollYProgress, [0.22, 0.27, 0.32, 0.35], [0, 1, 1, 0]);
+    const story3Y = useTransform(scrollYProgress, [0.22, 0.27, 0.32, 0.35], [30, 0, 0, -30]);
+    const story3Scale = useTransform(scrollYProgress, [0.22, 0.27], [0.95, 1]);
+
+    // Moment 4: 32-42%
+    const story4Opacity = useTransform(scrollYProgress, [0.32, 0.37, 0.42, 0.45], [0, 1, 1, 0]);
+    const story4Y = useTransform(scrollYProgress, [0.32, 0.37, 0.42, 0.45], [30, 0, 0, -30]);
+    const story4Scale = useTransform(scrollYProgress, [0.32, 0.37], [0.95, 1]);
+
+    // Moment 5: 42-52%
+    const story5Opacity = useTransform(scrollYProgress, [0.42, 0.47, 0.52, 0.55], [0, 1, 1, 0]);
+    const story5Y = useTransform(scrollYProgress, [0.42, 0.47, 0.52, 0.55], [30, 0, 0, -30]);
+    const story5Scale = useTransform(scrollYProgress, [0.42, 0.47], [0.95, 1]);
+
+    // Moment 6: 52-62%
+    const story6Opacity = useTransform(scrollYProgress, [0.52, 0.57, 0.62, 0.65], [0, 1, 1, 0]);
+    const story6Y = useTransform(scrollYProgress, [0.52, 0.57, 0.62, 0.65], [30, 0, 0, -30]);
+    const story6Scale = useTransform(scrollYProgress, [0.52, 0.57], [0.95, 1]);
+
+    // Moment 7: 62-72%
+    const story7Opacity = useTransform(scrollYProgress, [0.62, 0.67, 0.72, 0.75], [0, 1, 1, 0]);
+    const story7Y = useTransform(scrollYProgress, [0.62, 0.67, 0.72, 0.75], [30, 0, 0, -30]);
+    const story7Scale = useTransform(scrollYProgress, [0.62, 0.67], [0.95, 1]);
+
+    // Moment 8: 72-82%
+    const story8Opacity = useTransform(scrollYProgress, [0.72, 0.77, 0.82, 0.85], [0, 1, 1, 0]);
+    const story8Y = useTransform(scrollYProgress, [0.72, 0.77, 0.82, 0.85], [30, 0, 0, -30]);
+    const story8Scale = useTransform(scrollYProgress, [0.72, 0.77], [0.95, 1]);
+
+    // Moment 9: 82-92%
+    const story9Opacity = useTransform(scrollYProgress, [0.82, 0.87, 0.92, 0.95], [0, 1, 1, 0]);
+    const story9Y = useTransform(scrollYProgress, [0.82, 0.87, 0.92, 0.95], [30, 0, 0, -30]);
+    const story9Scale = useTransform(scrollYProgress, [0.82, 0.87], [0.95, 1]);
+
+    // Moment 10: 92-100%
+    const story10Opacity = useTransform(scrollYProgress, [0.92, 0.96, 1], [0, 1, 1]);
+    const story10Y = useTransform(scrollYProgress, [0.92, 0.96, 1], [30, 0, 0]);
+    const story10Scale = useTransform(scrollYProgress, [0.92, 0.96], [0.95, 1]);
+
+    // Progress bar width
+    const progressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+
+    useEffect(() => {
+        const loadImages = async () => {
+            const loadedImages = [];
+
+            // Load images in batches for better performance
+            const batchSize = 20;
+            for (let batch = 0; batch < Math.ceil(FRAME_COUNT / batchSize); batch++) {
+                const batchPromises = [];
+                const start = batch * batchSize + 1;
+                const end = Math.min((batch + 1) * batchSize, FRAME_COUNT);
+
+                for (let i = start; i <= end; i++) {
+                    const img = new Image();
+                    const src = `/sequence/ezgif-frame-${i.toString().padStart(3, "0")}.jpg`;
+                    img.src = src;
+
+                    const promise = new Promise((resolve) => {
+                        img.onload = () => resolve(img);
+                        img.onerror = () => {
+                            console.error(`Failed to load image ${src}`);
+                            resolve(null);
+                        };
+                    });
+
+                    batchPromises.push(promise);
+                }
+
+                const batchResults = await Promise.all(batchPromises);
+                loadedImages.push(...batchResults);
+            }
+
+            setImages(loadedImages.filter(img => img !== null));
+            setIsLoaded(true);
+        };
+
+        loadImages();
+    }, []);
+
+    const render = (index) => {
+        if (!images.length || !canvasRef.current) return;
+
+        const ctx = canvasRef.current.getContext("2d");
+        if (!ctx) return;
+
+        const idx = Math.min(FRAME_COUNT - 1, Math.max(0, Math.floor(index)));
+        const img = images[idx];
+
+        if (!img) return;
+
+        const canvas = canvasRef.current;
+
+        // Resize canvas to full screen for best resolution
+        if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Calculate aspect ratio to cover (for seamless blending)
+        const imgRatio = img.width / img.height;
+        const canvasRatio = canvas.width / canvas.height;
+
+        let drawWidth, drawHeight, offsetX, offsetY;
+
+        // Use 'cover' instead of 'contain' for seamless background blending
+        if (canvasRatio > imgRatio) {
+            drawWidth = canvas.width;
+            drawHeight = img.height * (canvas.width / img.width);
+            offsetX = 0;
+            offsetY = (canvas.height - drawHeight) / 2;
+        } else {
+            drawHeight = canvas.height;
+            drawWidth = img.width * (canvas.height / img.height);
+            offsetX = (canvas.width - drawWidth) / 2;
+            offsetY = 0;
+        }
+
+        ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+    };
+
+    useMotionValueEvent(currentIndex, "change", (latest) => {
+        render(latest);
+    });
+
+    // Initial render on load
+    useEffect(() => {
+        if (isLoaded) render(0);
+    }, [isLoaded]);
+
+    // Handle Resize
+    useEffect(() => {
+        const handleResize = () => {
+            if (isLoaded) render(currentIndex.get());
+        };
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, [isLoaded]);
+
+    return (
+        <div ref={containerRef} className="h-[500vh] relative bg-[#2a2a2a]">
+            {!isLoaded && (
+                <div className="h-screen w-full flex flex-col items-center justify-center sticky top-0 bg-[#2a2a2a] text-white/50 z-50">
+                    <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-white/70 mb-6"></div>
+                    <p className="text-sm tracking-wide font-light">Loading Zenith Optics...</p>
+                </div>
+            )}
+
+            <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ top: 0, opacity: isLoaded ? 1 : 0, transition: 'opacity 0.8s ease-in-out' }}>
+                <canvas ref={canvasRef} className="block w-full h-full" />
+
+                {/* Progress Bar */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10 z-50">
+                    <motion.div
+                        className="h-full bg-white/60"
+                        style={{ width: progressWidth }}
+                    />
+                </div>
+
+                {/* Text Overlays - 10 Storytelling Moments */}
+                <div className="absolute inset-0 pointer-events-none flex flex-col justify-center items-center px-6 md:px-12">
+
+                    {/* Moment 1: 0-12% - Introduction */}
+                    <motion.div
+                        style={{ opacity: story1Opacity, y: story1Y, scale: story1Scale }}
+                        className="absolute text-center max-w-4xl"
+                    >
+                        <h2 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white mb-6 drop-shadow-2xl">
+                            Every Frame<br />Tells a Story
+                        </h2>
+                        <p className="text-xl md:text-2xl text-white/80 font-light leading-relaxed backdrop-blur-sm bg-black/20 px-8 py-4 rounded-2xl">
+                            Welcome to the world of Zenith Optics
+                        </p>
+                    </motion.div>
+
+                    {/* Moment 2: 12-22% - The Craft */}
+                    <motion.div
+                        style={{ opacity: story2Opacity, y: story2Y, scale: story2Scale }}
+                        className="absolute text-center max-w-4xl"
+                    >
+                        <h2 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white mb-6 drop-shadow-2xl">
+                            Engineered for<br />Perfection
+                        </h2>
+                        <p className="text-xl md:text-2xl text-white/80 font-light leading-relaxed backdrop-blur-sm bg-black/20 px-8 py-4 rounded-2xl">
+                            Precision craftsmanship meets cutting-edge technology
+                        </p>
+                    </motion.div>
+
+                    {/* Moment 3: 22-32% - The Vision */}
+                    <motion.div
+                        style={{ opacity: story3Opacity, y: story3Y, scale: story3Scale }}
+                        className="absolute text-center max-w-4xl"
+                    >
+                        <h2 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white mb-6 drop-shadow-2xl">
+                            See Beyond<br />the Ordinary
+                        </h2>
+                        <p className="text-xl md:text-2xl text-white/80 font-light leading-relaxed backdrop-blur-sm bg-black/20 px-8 py-4 rounded-2xl">
+                            Capture what others can only imagine
+                        </p>
+                    </motion.div>
+
+                    {/* Moment 4: 32-42% - The Technology */}
+                    <motion.div
+                        style={{ opacity: story4Opacity, y: story4Y, scale: story4Scale }}
+                        className="absolute text-center max-w-4xl"
+                    >
+                        <h2 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white mb-6 drop-shadow-2xl">
+                            16 Elements<br />Infinite Possibilities
+                        </h2>
+                        <p className="text-xl md:text-2xl text-white/80 font-light leading-relaxed backdrop-blur-sm bg-black/20 px-8 py-4 rounded-2xl">
+                            Each glass element meticulously designed and coated
+                        </p>
+                    </motion.div>
+
+                    {/* Moment 5: 42-52% - The Detail */}
+                    <motion.div
+                        style={{ opacity: story5Opacity, y: story5Y, scale: story5Scale }}
+                        className="absolute text-center max-w-4xl"
+                    >
+                        <h2 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white mb-6 drop-shadow-2xl">
+                            Precision at<br />Every Layer
+                        </h2>
+                        <p className="text-xl md:text-2xl text-white/80 font-light leading-relaxed backdrop-blur-sm bg-black/20 px-8 py-4 rounded-2xl">
+                            Multi-coated optics eliminate flare and ghosting
+                        </p>
+                    </motion.div>
+
+                    {/* Moment 6: 52-62% - The Light */}
+                    <motion.div
+                        style={{ opacity: story6Opacity, y: story6Y, scale: story6Scale }}
+                        className="absolute text-center max-w-4xl"
+                    >
+                        <h2 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white mb-6 drop-shadow-2xl">
+                            Capturing<br />the Invisible
+                        </h2>
+                        <p className="text-xl md:text-2xl text-white/80 font-light leading-relaxed backdrop-blur-sm bg-black/20 px-8 py-4 rounded-2xl">
+                            Light bends to your creative will
+                        </p>
+                    </motion.div>
+
+                    {/* Moment 7: 62-72% - The Focus */}
+                    <motion.div
+                        style={{ opacity: story7Opacity, y: story7Y, scale: story7Scale }}
+                        className="absolute text-center max-w-4xl"
+                    >
+                        <h2 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white mb-6 drop-shadow-2xl">
+                            Where Art<br />Meets Science
+                        </h2>
+                        <p className="text-xl md:text-2xl text-white/80 font-light leading-relaxed backdrop-blur-sm bg-black/20 px-8 py-4 rounded-2xl">
+                            Ultra-fast autofocus locks in 0.03 seconds
+                        </p>
+                    </motion.div>
+
+                    {/* Moment 8: 72-82% - The Moment */}
+                    <motion.div
+                        style={{ opacity: story8Opacity, y: story8Y, scale: story8Scale }}
+                        className="absolute text-center max-w-4xl"
+                    >
+                        <h2 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white mb-6 drop-shadow-2xl">
+                            Never Miss<br />a Shot
+                        </h2>
+                        <p className="text-xl md:text-2xl text-white/80 font-light leading-relaxed backdrop-blur-sm bg-black/20 px-8 py-4 rounded-2xl">
+                            Weather-sealed for any adventure
+                        </p>
+                    </motion.div>
+
+                    {/* Moment 9: 82-92% - The Legacy */}
+                    <motion.div
+                        style={{ opacity: story9Opacity, y: story9Y, scale: story9Scale }}
+                        className="absolute text-center max-w-4xl"
+                    >
+                        <h2 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white mb-6 drop-shadow-2xl">
+                            Built for<br />Visionaries
+                        </h2>
+                        <p className="text-xl md:text-2xl text-white/80 font-light leading-relaxed backdrop-blur-sm bg-black/20 px-8 py-4 rounded-2xl">
+                            Join the creators who demand excellence
+                        </p>
+                    </motion.div>
+
+                    {/* Moment 10: 92-100% - The Call */}
+                    <motion.div
+                        style={{ opacity: story10Opacity, y: story10Y, scale: story10Scale }}
+                        className="absolute text-center max-w-4xl"
+                    >
+                        <h2 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white mb-8 drop-shadow-2xl">
+                            Your Story<br />Awaits
+                        </h2>
+                        <button className="pointer-events-auto px-12 py-5 bg-white text-black rounded-full hover:bg-white/95 hover:scale-105 transition-all duration-300 font-bold text-xl shadow-2xl">
+                            Pre-order Zenith Optics
+                        </button>
+                    </motion.div>
+
+                </div>
+            </div>
+        </div>
+    );
+}
