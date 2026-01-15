@@ -1,6 +1,6 @@
-# Zenith Optics - Cinematic Scrollytelling Experience
+# hypersense Optics - Cinematic Scrollytelling Experience
 
-A high-end, award-winning level landing page for "Zenith Optics," a fictional cinematic camera lens. This project features an immersive scrollytelling experience where a camera lens mechanically explodes and reassembles as the user scrolls, driven by a 240-frame high-fidelity image sequence.
+A high-end, award-winning level landing page for "HyperSense Optics," a fictional cinematic camera lens. This project features an immersive scrollytelling experience where a camera lens mechanically explodes and reassembles as the user scrolls, driven by a 240-frame high-fidelity image sequence.
 
 🔗 **Live Demo:** [Run locally to view]
 
