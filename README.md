@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zenith Optics - Cinematic Scrollytelling Experience
 
-## Getting Started
+A high-end, award-winning level landing page for "Zenith Optics," a fictional cinematic camera lens. This project features an immersive scrollytelling experience where a camera lens mechanically explodes and reassembles as the user scrolls, driven by a 240-frame high-fidelity image sequence.
 
-First, run the development server:
+🔗 **Live Demo:** [Run locally to view]
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Cinematic Scrollytelling**: 240-frame scroll-linked animation rendering at 60fps using HTML5 Canvas.
+- **Precision Typography**: Huge, impactful typography (Inter font family) with scroll-triggered fade-in animations.
+- **Seamless Blending**: "Pure Dark" aesthetic (#2a2a2a) where the canvas background blends perfectly with the UI.
+- **Performance Optimized**: Batch image pre-loading and efficient canvas rendering logic.
+- **Interactive Storytelling**: Content sections (Features, Specs, Use Cases) that reveal themselves cinematically.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎨 The Creative Process
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The core visual component of this project—the exploding lens animation—was crafted using a cutting-edge Generative AI workflow:
 
-## Learn More
+1.  **Concept Generation**: The initial (assembled) and final (fully exploded) keyframes were generated using **Google ImageFX**, establishing the visual fidelity and mechanical detail of the lens.
+2.  **Motion Synthesis**: Utilized **Google Veo/Flow** technology to interpolate and animate the transition between the two keyframes, creating a mechanically accurate and smooth 3D-like disassembly.
+3.  **Sequence Extraction**: The generated video animation was processed into a high-resolution sequence of **240 frames**, optimized for web performance.
+4.  **Vibe Coding**: The entire web experience was "Vibe Coded" with **Antigravity**, transforming the raw image sequence into a polished, interactive web application.
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS
+- **Animation**: Framer Motion (Scroll hooks & Layout animations)
+- **Rendering**: HTML5 Canvas API
+- **Language**: JavaScript/React
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Getting Started
 
-## Deploy on Vercel
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/quvoid/ScrollAnimationCameraModel.git
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Run the development server:
+    ```bash
+    npm run dev
+    ```
+4.  Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+*Built with precision. Vibe coded with Antigravity.*
