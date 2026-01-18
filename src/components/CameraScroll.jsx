@@ -220,7 +220,7 @@ export default function CameraScroll() {
                         borderBottom: '2px solid rgba(255,255,255,0.7)',
                         marginBottom: '24px'
                     }}></div>
-                    <p style={{ fontSize: '14px', letterSpacing: '0.05em', fontWeight: 300 }}>Loading Zenith Optics...</p>
+                    <p style={{ fontSize: '14px', letterSpacing: '0.05em', fontWeight: 300 }}>Loading Silicone Optics...</p>
                 </div>
             )}
 
@@ -258,7 +258,7 @@ export default function CameraScroll() {
                 <div style={textContainerStyle}>
                     <motion.div style={{ ...momentStyle, opacity: story1Opacity, y: story1Y, scale: story1Scale }}>
                         <h2 style={headingStyle}>Every Frame<br />Tells a Story</h2>
-                        <p style={subtitleStyle}>Welcome to the world of Zenith Optics</p>
+                        <p style={subtitleStyle}>Welcome to the world of Silicone Optics</p>
                     </motion.div>
 
                     <motion.div style={{ ...momentStyle, opacity: story2Opacity, y: story2Y, scale: story2Scale }}>
@@ -320,7 +320,7 @@ export default function CameraScroll() {
                             onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
                             onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
                         >
-                            Pre-order Zenith Optics
+                            Pre-order Silicone Optics
                         </button>
                     </motion.div>
                 </div>

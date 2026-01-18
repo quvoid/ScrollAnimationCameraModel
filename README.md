@@ -1,10 +1,10 @@
-# Zenith Optics - Cinematic Scrollytelling Experience
+# Silicone Optics - Cinematic Scrollytelling Experience
 
 > [!IMPORTANT]
 > **⚡ VIBECODED PROJECT**
 > This entire experience was **Vibecoded** by the developer using **Antigravity**. From the initial concept to the final premium UI, the code was generated through a fluid, AI-assisted workflow.
 
-A high-end, award-winning level landing page for "Zenith Optics," a fictional cinematic camera lens. This project features an immersive scrollytelling experience where a camera lens mechanically explodes and reassembles as the user scrolls, driven by a 240-frame high-fidelity image sequence.
+A high-end, award-winning level landing page for "Silicone Optics," a fictional cinematic camera lens. This project features an immersive scrollytelling experience where a camera lens mechanically explodes and reassembles as the user scrolls, driven by a 240-frame high-fidelity image sequence.
 
 🔗 **Live Demo:** [Run locally to view]
 

@@ -1,7 +1,7 @@
 "use client";
 
 import CameraScroll from "@/components/CameraScroll";
-import ZenithNavbar from "@/components/Navbar";
+import SiliconeNavbar from "@/components/Navbar";
 import FeatureCards from "@/components/FeatureCards";
 import { motion } from "framer-motion";
 import { Button } from "@heroui/button";
@@ -9,7 +9,7 @@ import { Button } from "@heroui/button";
 export default function Home() {
     return (
         <main className="min-h-screen bg-[#2a2a2a]">
-            <ZenithNavbar />
+            <SiliconeNavbar />
             <CameraScroll />
             <FeatureCards />
 
@@ -25,7 +25,7 @@ export default function Home() {
                         Ready to Create?
                     </h2>
                     <p className="max-w-2xl mx-auto text-xl md:text-2xl text-white/70 leading-relaxed font-light">
-                        Join thousands of creators who trust Zenith Optics<br />
+                        Join thousands of creators who trust Silicone Optics<br />
                         to bring their vision to life.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
@@ -66,7 +66,7 @@ export default function Home() {
                         </a>
                     </div>
                     <p className="text-sm text-white/40 font-light">
-                        © 2024 Zenith Optics. All rights reserved.
+                        © 2024 Silicone Optics. All rights reserved.
                     </p>
                 </motion.div>
             </section>

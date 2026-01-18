@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Zenith Optics - Premium Camera Experience",
-  description: "Discover the future of photography with Zenith Optics. Cinematic scrollytelling experience.",
+  title: "Silicone Optics - Premium Camera Experience",
+  description: "Discover the future of photography with Silicone Optics. Cinematic scrollytelling experience.",
 };
 
 export default function RootLayout({
