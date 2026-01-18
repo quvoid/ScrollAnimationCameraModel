@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function ZenithNavbar() {
+export default function SiliconeNavbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
@@ -12,7 +12,7 @@ export default function ZenithNavbar() {
                     {/* Logo */}
                     <div className="flex-shrink-0">
                         <h1 className="text-white font-bold text-lg tracking-tight">
-                            ZENITH <span className="font-light text-white/80">OPTICS</span>
+                            SILICONE <span className="font-light text-white/80">OPTICS</span>
                         </h1>
                     </div>
 
