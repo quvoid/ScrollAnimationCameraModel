@@ -1,15 +1,20 @@
 "use client";
 
 import CameraScroll from "@/components/CameraScroll";
+import ZenithNavbar from "@/components/Navbar";
+import FeatureCards from "@/components/FeatureCards";
 import { motion } from "framer-motion";
+import { Button } from "@heroui/button";
 
 export default function Home() {
     return (
         <main className="min-h-screen bg-[#2a2a2a]">
+            <ZenithNavbar />
             <CameraScroll />
+            <FeatureCards />
 
             {/* Minimal Footer */}
-            <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-b from-[#2a2a2a] to-[#0a0a0a]">
+            <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-b from-[#1a1a1a] to-[#0a0a0a]">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -24,12 +29,21 @@ export default function Home() {
                         to bring their vision to life.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
-                        <button className="px-12 py-5 bg-white text-black rounded-full hover:bg-white/95 hover:scale-105 transition-all duration-300 font-bold text-lg shadow-2xl">
+                        <Button
+                            size="lg"
+                            radius="full"
+                            className="px-12 py-7 bg-white text-black font-bold text-lg shadow-2xl hover:scale-105 transition-transform"
+                        >
                             Pre-order Now
-                        </button>
-                        <button className="px-12 py-5 border-2 border-white/30 text-white rounded-full hover:border-white/60 hover:scale-105 transition-all duration-300 font-semibold text-lg">
+                        </Button>
+                        <Button
+                            size="lg"
+                            radius="full"
+                            variant="bordered"
+                            className="px-12 py-7 border-2 border-white/30 text-white font-semibold text-lg hover:border-white/60 hover:scale-105 transition-all"
+                        >
                             Learn More
-                        </button>
+                        </Button>
                     </div>
                 </motion.div>
 
